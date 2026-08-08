@@ -1,45 +1,28 @@
 <p align="center">
-  <img src="assets/mascot/pip_flight_loop.gif" alt="Pip, the courier bird" width="200">
+  <img src="assets/mascot/pip_flight_loop.gif" alt="Pip, the courier bird" width="150">
 </p>
 
-# AI Job Search
+# AI Job Search — Toan's fork
 
 *The job search that runs on your machine.*
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/43622?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-43622" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/43622/daily" alt="MadsLorentzen%2Fai-job-search | Trendshift" width="250" height="55"/></a>
-</p>
+My personal job-search workspace: a Claude Code framework that evaluates job postings against my profile, tailors a CV and cover letter for each one, tracks the whole pipeline, and preps me for interviews. Currently running my Canada-based co-op/new-grad search (Toronto/GTA + remote), scoped to what my study/co-op work permit actually allows — see the work-authorization gate in `04-job-evaluation.md`.
 
-[![CI](https://github.com/MadsLorentzen/ai-job-search/actions/workflows/ci.yml/badge.svg)](https://github.com/MadsLorentzen/ai-job-search/actions/workflows/ci.yml)
-
-An AI-powered job application framework built on [Claude Code](https://claude.com/claude-code). Fork it, fill in your profile, and let Claude evaluate job postings, tailor your CV, write cover letters, and prepare you for interviews.
+This is a personal fork of [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search), a public template. **This fork's repo contains real personal data** (name, contact details, work history, tailored applications) — see [Before you push this anywhere](#before-you-push-this-anywhere) below.
 
 > Note: This is an independent open-source project and is not affiliated with, endorsed by, sponsored by, or maintained by Anthropic. Anthropic and Claude Code are referenced only to describe the toolchain this workflow uses.
->
-> This project has **no affiliated cryptocurrency, token, or paid sponsorship program**. Anything claiming otherwise is unauthorized and should be treated as a scam. The only ways to support the project are the Ko-fi link below and contributing on GitHub.
 
-## Does it actually work?
+## Before you push this anywhere
 
-I'm a geophysicist by training. When my position was cut in late 2025, I built this framework to run my own job search - the same `/scrape`, `/apply`, and `/interview` workflow in this repo, used weekly, on my own career. I was upfront about it with every employer I spoke to, and instead of counting against me, it usually sparked a genuine technical conversation.
+Unlike the upstream template (which ships with placeholder data only), **this fork has been through `/setup` and `/apply` for real** — `CLAUDE.md`, `01-candidate-profile.md`, and `cv/main_example.tex` all contain my actual name, contact details, and work history, and they are tracked in git by the framework's own design (so `/setup` output survives a `git pull`). Before pushing this repo anywhere:
 
-Sixty-nine tailored applications, twenty first interviews, and one signed contract later, I started as an AI engineer in June 2026. People kept asking whether this actually works. It got me hired. Now it's yours.
-
-*The longer version, including the full application funnel, is on [LinkedIn](https://www.linkedin.com/in/mads-lorentzen/).*
-
-<p align="center">
-  <i>Did this save you a Sunday of cover-letter writing? Consider a coffee.<br>
-  Did it land you the job? Maybe two.</i> ☕
-</p>
-
-<p align="center">
-  <a href="https://ko-fi.com/madslorentzen">
-    <img src="https://storage.ko-fi.com/cdn/kofi3.png?v=6" alt="Buy me a coffee at ko-fi.com" height="40">
-  </a>
-</p>
+- **Set the remote to somewhere I actually control** - `git remote -v` must not still point at `MadsLorentzen/ai-job-search` or any other account. Fork on GitHub first, or create a new empty repo, then `git remote set-url origin <my-own-repo-url>`.
+- **Default to a private repository** unless there's a specific reason to make it public. Tailored CVs, cover letters, and the application tracker are gitignored (see `.gitignore`), but the profile files above are not, and those alone contain enough to identify me.
+- **Never commit `job_search_tracker.csv`, `documents/**`, `gmail_sync/`, or anything under `applications/*/`** - all already gitignored, but double-check `git status` before any `git add -A`.
 
 ## What this is
 
-A structured workflow that turns Claude Code into a full-stack job application assistant. The core workflow (self-profiling, fit evaluation, and the drafter-reviewer application pipeline) is **language- and country-agnostic**. The job portal search skills are built for the Danish market (Jobindex, Jobnet, Akademikernes Jobbank, etc.), but the pattern is designed to be swapped for your local job boards.
+A structured workflow that turns Claude Code into a full-stack job application assistant. The core workflow (self-profiling, fit evaluation, and the drafter-reviewer application pipeline) is **language- and country-agnostic**. This fork's job portal search skills target the Canada/remote market (Job Bank, Eluta, RemoteOK, We Work Remotely, LinkedIn), but the pattern is designed to be swapped for any local job board via `/add-portal`.
 
 ```
 /setup          /scrape              /apply <url>
@@ -71,17 +54,21 @@ The framework encodes career guidance best practices, including structured evalu
 
 ### 1. Fork and clone
 
+Already done for this checkout. For reference, the original setup was:
+
 ```bash
 gh repo fork MadsLorentzen/ai-job-search --clone
 cd ai-job-search
 ```
+
+Before pushing anywhere, confirm `origin` points at a repo I actually own (`git remote -v`) — see [Before you push this anywhere](#before-you-push-this-anywhere) above.
 
 ### 2. Install job search tools
 
 PowerShell:
 
 ```powershell
-$tools = @("jobbank-search", "jobdanmark-search", "jobindex-search", "jobnet-search", "linkedin-search", "freehire-search")
+$tools = @("jobbank-ca-search", "remoteok-search", "weworkremotely-search", "eluta-search", "linkedin-search", "freehire-search")
 foreach ($tool in $tools) {
   Push-Location ".agents/skills/$tool/cli"
   bun install
@@ -92,7 +79,7 @@ foreach ($tool in $tools) {
 Bash / zsh / Git Bash:
 
 ```bash
-for tool in jobbank-search jobdanmark-search jobindex-search jobnet-search linkedin-search freehire-search; do
+for tool in jobbank-ca-search remoteok-search weworkremotely-search eluta-search linkedin-search freehire-search; do
   (cd .agents/skills/$tool/cli && bun install)
 done
 ```
@@ -120,7 +107,7 @@ This searches multiple job portals for positions matching your profile, deduplic
 ### 5. Apply to a job
 
 ```bash
-/apply https://jobindex.dk/job/1234567
+/apply https://ca.linkedin.com/jobs/view/1234567
 ```
 
 If the URL can't be fetched (some job portals block automated access), you can paste the job description directly instead:
@@ -135,7 +122,7 @@ Postings are treated as untrusted input (the workflow follows no instructions em
 
 ## Other commands
 
-`/setup`, `/scrape`, and `/apply` form the core workflow. Ten more commands extend it once your profile is in place:
+`/setup`, `/scrape`, and `/apply` form the core workflow. Eleven more commands extend it once your profile is in place:
 
 - **`/interview`** preps you for a scheduled interview on a tracked application. It builds a stage-specific prep pack from the application's archive (the exact posting, the CV and cover letter the interviewer actually read, feedback recorded from earlier rounds), researches the company and interviewers with a verify-before-use rule, maps likely questions to your STAR examples, and offers a mock interview following the roleplay protocol in `07-interview-prep.md`. Gaps get honest bridge answers, never invented experience.
 - **`/outcome`** records what happened to an application - interview stages, offers, rejections, silence. It archives the submitted CV, cover letter, and posting text into `documents/applications/<company>_<role>/`, keeps `outcome.md` in the format `/setup` Path A parses, and updates the tracker. It also owns the stretch before there is an outcome to record: `/outcome followup` surfaces open applications that have gone quiet (default 10 days), drafts a short channel-appropriate follow-up in your writing style using only claims from the materials you already submitted (drafts only, never sends; at most twice per application), and offers a thank-you note in the same turn an interview stage is recorded. Once a few applications resolve, it points you back to `/setup` to calibrate the fit framework from what actually got interviews.
@@ -147,6 +134,7 @@ Postings are treated as untrusted input (the workflow follows no instructions em
 - **`/html-report`** generates a self-contained HTML dashboard from `job_search_tracker.csv` and the application archives — stat cards, status/sector/channel/funnel charts (inline SVG, no external dependencies), and a filterable applications table. Opens directly in a browser, fully offline. Re-run it any time after `/outcome` adds new entries.
 - **`/add-template`** registers your own CV or cover letter template (LaTeX, Typst, or another toolchain) in place of the stock ones. It captures the template's instructions (source extension, compile command, fonts, style rules, page limit), runs a mandatory test compile, and wires the template into `/apply`. See [Custom templates](#custom-templates) below.
 - **`/add-portal`** generates a job-portal search skill for a job board in your market. It investigates the portal (search URL pattern, result structure, access rules), scaffolds the CLI skill from the same structure as the shipped ones, and test-runs a live query before registering. See [Job search tools](#job-search-tools) below.
+- **`/clear-cv`** deletes the working `applications/<company>_<role>/` folder for applications that closed with a negative outcome (rejected, no response, withdrawn, offer declined by default - never `hired`). Always previews before deleting. Never touches the permanent `documents/applications/` archive, which stays regardless of outcome for fit-framework calibration.
 
 `/reset` is also available, see [Starting over](#starting-over) below.
 
@@ -168,7 +156,8 @@ ai-job-search/
 │   │   ├── interview.md               # /interview stage-specific prep pack + mock interview
 │   │   ├── html-report.md             # /html-report generate application tracker dashboard
 │   │   ├── notion-sync.md             # /notion-sync one-way pipeline view in a Notion database
-│   │   └── reset.md                   # /reset wipe profile data or documents folder
+│   │   ├── reset.md                    # /reset wipe profile data or documents folder
+│   │   └── clear-cv.md                 # /clear-cv delete working files for closed applications
 │   ├── skills/
 │   │   ├── job-application-assistant/  # Core application skill
 │   │   │   ├── SKILL.md               # Skill definition
@@ -183,18 +172,21 @@ ai-job-search/
 │   │   └── upskill/                   # /upskill skill gap analysis and learning plan
 │   └── settings.json                  # Claude Code permissions (shared, scoped)
 ├── .agents/skills/                    # Job portal CLI tools
-│   ├── jobbank-search/                # Akademikernes Jobbank (Denmark)
-│   ├── jobdanmark-search/             # Jobdanmark.dk (Denmark)
-│   ├── jobindex-search/               # Jobindex.dk (Denmark)
-│   ├── jobnet-search/                 # Jobnet.dk (Denmark, government portal)
+│   ├── jobbank-ca-search/             # Government of Canada Job Bank
+│   ├── eluta-search/                  # Eluta.ca (Canada-wide)
+│   ├── remoteok-search/               # RemoteOK (remote tech jobs)
+│   ├── weworkremotely-search/         # We Work Remotely (remote tech jobs)
 │   ├── linkedin-search/               # LinkedIn public job listings (country-agnostic)
 │   └── freehire-search/               # freehire.me tech job aggregator (multi-market, REST API)
 ├── cv/
-│   └── main_example.tex               # moderncv LaTeX template
+│   └── main_example.tex               # moderncv LaTeX master template
 ├── cover_letters/
 │   ├── cover.cls                      # Custom cover letter LaTeX class
 │   ├── cover_example.tex              # Example cover letter (structural reference + CI smoke test)
-│   └── OpenFonts/                     # Lato + Raleway fonts
+│   └── OpenFonts/                     # Lato + Raleway fonts (shared, symlinked into each application)
+├── applications/                      # One folder per tailored application (gitignored)
+│   ├── README.md                      # Convention doc (tracked)
+│   └── <company>_<role>/              # cv.tex/.pdf, cover_letter.tex/.pdf, README.md with the apply link
 ├── templates/                         # Custom templates registered via /add-template
 │   └── README.md                      # Folder layout instructions
 ├── documents/                         # Career source materials for /setup Path A and /expand
@@ -203,7 +195,7 @@ ai-job-search/
 │   ├── linkedin/                      # LinkedIn profile export (PDF)
 │   ├── diplomas/                      # Degree certificates and transcripts
 │   ├── references/                    # Reference letters
-│   └── applications/                  # Past application records (<company>_<role>/)
+│   └── applications/                  # Permanent submitted-materials archive (<company>_<role>/), kept regardless of outcome
 ├── .github/workflows/ci.yml           # CI: LaTeX smoke compiles, skill lint, CLI typechecks
 ├── salary_lookup.py                   # Salary benchmarking tool (BYO data)
 ├── tools/
@@ -214,7 +206,7 @@ ai-job-search/
 ├── job_scraper/                       # Scraper state (seen jobs, results)
 ├── gmail_sync/                        # /gmail-sync state (processed message IDs, last sync date)
 ├── upskill/                           # /upskill report output (markdown reports per run)
-├── job_search_tracker.csv             # Application tracking spreadsheet
+├── job_search_tracker.csv             # Application tracking spreadsheet (gitignored)
 └── SETUP.md                           # Detailed setup guide
 ```
 
@@ -287,7 +279,7 @@ If you prefer doing it by hand, the manual route still works: update the guidanc
 
 ### Job search tools
 
-The four Danish CLI tools in `.agents/skills/` (Jobbank, Jobdanmark, Jobindex, Jobnet) demonstrate the pattern for building a job-portal integration for a specific market. If you're in a different country, run:
+The Canada/remote CLI tools in `.agents/skills/` (`jobbank-ca-search`, `eluta-search`, `remoteok-search`, `weworkremotely-search`) demonstrate the pattern for building a job-portal integration for a specific market. Need a board for a different market? Run:
 
 ```
 /add-portal
@@ -297,10 +289,10 @@ Give it your local job board's URL. The command investigates the portal (search-
 
 Maintaining a fork adapted to your market or language? Add it to the [Community forks & adaptations](https://github.com/MadsLorentzen/ai-job-search/discussions/78) thread so others can find it.
 
-For **country-agnostic** starting points outside Denmark, the repo ships two portal skills alongside the Danish demos:
+For **country-agnostic** starting points that work in any market, the repo also ships:
 
-- **`linkedin-search`** — built on LinkedIn's public, unauthenticated `jobs-guest` endpoints. Field-agnostic, **zero runtime dependencies** (runs with just `bun`), and takes the search location as an explicit flag, so it works for any market out of the box (`-l "Berlin, Germany"`, `-l "Mumbai, Maharashtra, India"`, `-l "Remote"`, …). Intended for **personal use only** — automated access is against LinkedIn's Terms of Service, so keep volume low. See `.agents/skills/linkedin-search/SKILL.md`.
-- **`freehire-search`** — queries the [freehire.me](https://freehire.me) aggregator's public REST API (JSON, no API key). Tech-focused (software, data, engineering, DevOps, remote), multi-market via facet flags (`--region`, `--country`, `--remote`), and **zero runtime dependencies**. Unlike the HTML-scraping Danish portals, results come back structured (skills, seniority, category). The backend is MIT-licensed and [self-hostable](https://github.com/strelov1/freehire) — point `FREEHIRE_API_URL` at your own instance if you prefer. See `.agents/skills/freehire-search/SKILL.md`.
+- **`linkedin-search`** — built on LinkedIn's public, unauthenticated `jobs-guest` endpoints. Field-agnostic, **zero runtime dependencies** (runs with just `bun`), and takes the search location as an explicit flag, so it works for any market out of the box (`-l "Toronto, Ontario, Canada"`, `-l "Remote"`, …). Intended for **personal use only** — automated access is against LinkedIn's Terms of Service, so keep volume low. See `.agents/skills/linkedin-search/SKILL.md`.
+- **`freehire-search`** — queries the [freehire.me](https://freehire.me) aggregator's public REST API (JSON, no API key). Tech-focused (software, data, engineering, DevOps, remote), multi-market via facet flags (`--region`, `--country`, `--remote`), and **zero runtime dependencies**. Unlike the HTML-scraping portal CLIs, results come back structured (skills, seniority, category). The backend is MIT-licensed and [self-hostable](https://github.com/strelov1/freehire) — point `FREEHIRE_API_URL` at your own instance if you prefer. See `.agents/skills/freehire-search/SKILL.md`.
 
 ### Extending the framework: portals, templates, criteria - and borrowing from other forks
 
@@ -361,10 +353,11 @@ To get the most from this, invest time during `/setup` in describing not just yo
 
 ## Contributing
 
-Thinking about a PR? Read [CONTRIBUTING.md](CONTRIBUTING.md) first - it explains what gets merged, what lives in forks, and why.
+This is a personal fork, not accepting PRs. A generic improvement (a bug fix, a new extension point) belongs upstream instead — see [CONTRIBUTING.md](CONTRIBUTING.md), which documents the original project's policy on what gets merged and what stays fork-specific.
 
 ## Acknowledgements
 
+- [Mads Lorentzen](https://github.com/MadsLorentzen) for [the original `ai-job-search` template](https://github.com/MadsLorentzen/ai-job-search) this fork is built on
 - [Mikkel Krogholm](https://github.com/mikkelkrogsholm) ([skills repo](https://github.com/mikkelkrogsholm/skills)) for the job search CLI skills
 - Built with [Claude Code](https://claude.com/claude-code) by [Anthropic](https://anthropic.com)
 

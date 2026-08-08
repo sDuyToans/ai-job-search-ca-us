@@ -16,26 +16,33 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 
 <!-- These are populated by /setup from your actual experience. Below are templates showing the format. -->
 
-### 1. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT - what was happening, what was the problem]
-**T:** [YOUR RESPONSIBILITY - what you specifically needed to do]
-**A:** [WHAT YOU DID - specific actions, tools, methods]
-**R:** [OUTCOME - measurable results, adoption, impact]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### 1. Imaji Coffee (full-stack architecture & end-to-end ownership)
+**S:** Wanted to prove out full-stack, production-grade system design beyond coursework and short-term co-op assignments - a self-initiated e-commerce platform, not an assigned project.
+**T:** Architect and build the entire stack solo: backend API, frontend, auth, payments, real-time features, and deployment.
+**A:** Designed and built a Spring Boot 3 (Java 17) REST API with JWT auth and role-based access control (Admin/Customer), paired with a Vite/React 18/TypeScript frontend styled with HeroUI and Tailwind CSS. Added real-time customer chat over WebSocket+STOMP (with SockJS fallback), integrated Stripe and PayPal with webhook-driven order status updates, added Caffeine caching and Swagger API docs, then Dockerized the whole app and deployed it on AWS (Elastic Beanstalk for the backend, Amplify for the frontend) with CI/CD-ready configuration.
+**R:** Shipped a live, publicly accessible e-commerce platform (imajiicoffee.cc) covering the full path from auth to payment to deployment - concrete evidence of being able to own a system end-to-end rather than a single layer.
+**Use for:** "Tell me about a project you're proud of", "Describe a time you took ownership of something", "Walk me through your technical decision-making"
 
-### 2. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT]
-**T:** [YOUR RESPONSIBILITY]
-**A:** [WHAT YOU DID]
-**R:** [OUTCOME]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### 2. Ministry of Public and Business Service Delivery and Procurement (QA automation & root-cause debugging)
+**S:** Joined a government software team's QA function during a co-op work term, responsible for catching issues before they reached developers or production.
+**T:** Design and maintain automated test coverage, and turn failing tests into actionable defect reports developers can act on quickly.
+**A:** Built and maintained automated test scripts in Selenium/Java/Maven, running suites through Azure DevOps CI/CD pipelines. When tests failed, traced root causes rather than just flagging the symptom, and documented defects clearly to speed up developer turnaround. Also reviewed requirements directly with developers and analysts up front to design edge-case-aware test cases, and supported manual/exploratory testing during early development phases.
+**R:** Contributed to the team's continuous QA process improvement by catching issues earlier in the cycle and giving developers debugging-ready defect reports instead of raw failures.
+**Use for:** "Tell me about a time you found a critical bug", "How do you approach quality/testing?", "Describe working cross-functionally with developers"
 
-### 3. [PROJECT_NAME] ([SKILL_DEMONSTRATED])
-**S:** [CONTEXT]
-**T:** [YOUR RESPONSIBILITY]
-**A:** [WHAT YOU DID]
-**R:** [OUTCOME]
-**Use for:** "[QUESTION_TYPE_1]", "[QUESTION_TYPE_2]"
+### 3. FPT Software (fast ramp-up & delivering under Agile/Scrum)
+**S:** Joined FPT Software's Java outsourcing team for a Japan-based client shortly after completing Java & Spring Boot training - a new stack, a new client, and an unfamiliar low-code platform (OutSystems) all within the same role.
+**T:** Get productive quickly: build secure REST APIs for the client, then take on migrating existing Python and React applications onto OutSystems.
+**A:** Designed and deployed Spring Boot + MySQL API endpoints with proper CORS/CSRF handling, and optimized SQL queries across Azure DB and MySQL to improve data access speed. Migrated Python and React applications to OutSystems, improving query aggregates there for faster response times, and built reusable JavaScript functions/components to cut repeated processing work.
+**R:** Consistently delivered on schedule within Agile/Scrum sprints despite ramping up on Spring Boot, a new client's codebase, and OutSystems in quick succession.
+**Use for:** "How do you learn a new technology quickly?", "Tell me about working with an unfamiliar tool/platform", "Describe delivering under a deadline"
+
+### 4. Focus Grove (solving a tricky technical problem)
+**S:** Building a personal productivity app with a live timer feature, discovered that browser tab throttling silently breaks naive timer implementations - a subtle correctness bug that would only show up after the tab was backgrounded for a while.
+**T:** Make the timer reliable regardless of tab state or reloads, without a backend to fall back on.
+**A:** Engineered a wall-clock-based timer hook (rather than relying on `setInterval` ticks) so elapsed time is always computed from real timestamps, making it resilient to tab throttling and page reloads. Also built a pluggable auth layer (a mock adapter plus Supabase Google OAuth) and an offline-first sync layer that writes to localStorage first and queues cloud sync to Supabase (with row-level security) when back online.
+**R:** Shipped a timer that stays accurate across backgrounded tabs and reloads, plus an app that keeps working offline and syncs safely when connectivity returns - both non-obvious problems solved through root-cause thinking rather than surface fixes.
+**Use for:** "Tell me about a hard technical problem you solved", "Describe debugging something subtle", "How do you handle edge cases?"
 
 <!-- Add more STAR examples as needed. Aim for 4-6 covering different competencies. -->
 

@@ -1,8 +1,7 @@
-%% Example CV - [YOUR_NAME]
+%% Example CV - Le Duy Toan Nguyen
 %% Comprehensive overview of all competencies, experience, and achievements.
 %% Use as a master reference when tailoring role-specific CVs.
 %%
-%% SETUP: Run /setup to populate this with your actual information.
 %% Compile with: lualatex main_example.tex
 %% (pdflatex often fails on modern MiKTeX with fontawesome5 font-expansion errors.)
 
@@ -24,18 +23,19 @@
     linkcolor=blue,
     filecolor=magenta,
     urlcolor=blue,
-    pdftitle={[YOUR_NAME] - CV},
+    pdftitle={Le Duy Toan Nguyen - CV},
     pdfpagemode=FullScreen,
 }
 \usepackage[scale=0.80]{geometry}
 \usepackage{import}
+\usepackage{needspace}
 
 % personal data
-\name{[First]}{[Last]}
-\address{[Your Address, City, Country]}{}{}
-\phone[mobile]{[+XX XXXXXXXXXX]}
-\email{[your.email@example.com]}
-\extrainfo{\href{[https://linkedin.com/in/your-profile]}{LinkedIn}, \href{[https://github.com/your-username]}{GitHub}}
+\name{Le Duy Toan}{Nguyen}
+\address{Mississauga, ON, Canada}{}{}
+\phone[mobile]{+1 (647) 713-4689}
+\email{duytoanca@gmail.com}
+\extrainfo{\href{https://linkedin.com/in/duytoan}{LinkedIn}, \href{https://toandev.me}{Portfolio}}
 
 \begin{document}
 
@@ -46,7 +46,7 @@
 % ============================================================
 
 \vspace{6pt}
-\small{[Write a 3-5 line profile statement tailored to the role you're applying for. Focus on what makes you uniquely qualified. Example: "Data scientist with a PhD in [field] and X years of industry experience. Combines deep domain expertise in [domain] with strong applied machine learning and Python development skills. Experienced in developing end-to-end ML pipelines, from data ingestion to stakeholder-facing dashboards."]}
+\small{Full-stack developer with hands-on experience across React/TypeScript frontends and Spring Boot/Java backends, currently completing an Advanced Diploma in Computer Systems Technology at Sheridan College (expected 12/2027). Has independently architected and shipped complete production-style systems - including a full e-commerce platform with JWT auth, real-time chat, and payment integration, deployed on AWS - alongside professional experience building secure REST APIs for a Japan-based client and current co-op experience in QA/test automation.}
 
 % ============================================================
 %     CORE COMPETENCIES
@@ -56,15 +56,15 @@
 \vspace{1pt}
 \begin{itemize}
 
-\item \textbf{[Skill Category 1]}: [Specific skills, frameworks, tools. Be concrete.]
+\item \textbf{Full-Stack Development}: React, Vite, TypeScript, Spring Boot, MySQL, Tailwind CSS, HeroUI.
 
-\item \textbf{[Skill Category 2]}: [Specific skills, frameworks, tools.]
+\item \textbf{Backend \& Security}: Spring Security (JWT/OAuth2), REST APIs, WebSocket/STOMP, CORS/CSRF handling.
 
-\item \textbf{[Skill Category 3]}: [Specific skills, frameworks, tools.]
+\item \textbf{Databases \& BaaS}: MySQL, PostgreSQL, Oracle, MongoDB, Supabase.
 
-\item \textbf{[Skill Category 4]}: [Domain expertise, methods, approaches.]
+\item \textbf{Testing \& Automation}: Selenium WebDriver, JUnit, Vitest, Python, CI/CD (Azure DevOps).
 
-\item \textbf{[Skill Category 5]}: [Tools, platforms, software.]
+\item \textbf{Cloud \& DevOps}: AWS (Amplify, Elastic Beanstalk, Route 53), Docker, Git, Agile/Scrum.
 
 \end{itemize}
 
@@ -77,31 +77,36 @@
 \begin{itemize}
 
 % --- Most Recent Role ---
-\item{\cventry{[YYYY--Present]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{2026--Present}{Software Engineer / Tester Co-op}{Ministry of Public and Business Service Delivery and Procurement}{Ontario, Canada}{}{\vspace{1pt}
 \begin{itemize}
-    \item [Achievement or responsibility 1 - be specific, use numbers where possible]
-    \item [Achievement or responsibility 2]
-    \item [Achievement or responsibility 3]
-    \item [Achievement or responsibility 4]
+    \item Design, develop, and maintain automated test scripts using Selenium, Java, and Maven, executing suites through Azure DevOps CI/CD pipelines.
+    \item Debug test failures, trace root causes, and document defects clearly to speed up developer turnaround.
+    \item Review project requirements with developers and analysts to define effective, edge-case-aware test cases.
+    \item Support manual testing during early development phases and exploratory testing, contributing to continuous QA process improvement.
 \end{itemize}}}
 
 \vspace{3pt}
 
 % --- Previous Role ---
-\item{\cventry{[YYYY--YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{2023--2024}{Software Developer}{FPT Software}{}{}{\vspace{1pt}
 \begin{itemize}
-    \item [Achievement or responsibility 1]
-    \item [Achievement or responsibility 2]
-    \item [Achievement or responsibility 3]
+    \item Completed Java \& Spring Boot training and joined a Java outsourcing team for a Japan-based client, building secure REST APIs with CORS/CSRF handling.
+    \item Designed and deployed Spring Boot + MySQL API endpoints, then optimized SQL queries across Azure DB and MySQL to improve data access speed.
+    \item Migrated Python and React applications to OutSystems and improved query aggregates for faster response times, accelerating delivery timelines.
+    \item Built reusable JavaScript functions and components to cut processing time, consistently delivering on schedule within Agile/Scrum sprints.
 \end{itemize}}}
 
 \vspace{3pt}
 
 % --- Earlier Role ---
-\item{\cventry{[YYYY--YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{2022--2022}{Frontend Developer}{Tomaho Software}{}{}{\vspace{1pt}
 \begin{itemize}
-    \item [Achievement or responsibility 1]
-    \item [Achievement or responsibility 2]
+    \item Developed and customized ReactJS UI components for an Accounting Solution application, using Redux, Redux Thunk, and Redux Saga for scalable state management.
+    \item Designed responsive interfaces with Material UI and custom styling tailored to client needs.
+    \item Refactored code into reusable components to reduce duplication, and optimized rendering performance using React hooks like useMemo.
 \end{itemize}}}
 
 \end{itemize}
@@ -114,14 +119,9 @@
 \vspace{1pt}
 \begin{itemize}
 
-\item{\cventry{[YYYY--YYYY]}{[Degree] in [Field]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
-Thesis: ``[Thesis Title].'' [Brief description of research focus.]
-}}
-
-\vspace{3pt}
-
-\item{\cventry{[YYYY--YYYY]}{[Degree] in [Field]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
-[Brief description or key topics.]
+\needspace{5\baselineskip}
+\item{\cventry{2023--2027}{Computer Systems Technology: Software Development and Network Engineering}{Sheridan College}{Mississauga, ON, Canada}{}{\vspace{1pt}
+Advanced Diploma. In progress, expected December 2027. GPA: 3.7. Focus on software development and network engineering.
 }}
 
 \end{itemize}
@@ -133,27 +133,7 @@ Thesis: ``[Thesis Title].'' [Brief description of research focus.]
 \section{Languages}
 \vspace{1pt}
 \begin{itemize}
-\item [Language 1] (native), [Language 2] (fluent), [Language 3] (intermediate).
-\end{itemize}
-
-% ============================================================
-%     PUBLICATIONS (optional)
-% ============================================================
-
-\section{Publications}
-\vspace{1pt}
-\begin{itemize}
-\item [Author(s)] ([Year]). [Title]. [Journal/Conference]. \href{[DOI_URL]}{DOI link}
-\end{itemize}
-
-% ============================================================
-%     HONORS AND AWARDS (optional)
-% ============================================================
-
-\section{Honors and Awards}
-\vspace{1pt}
-\begin{itemize}
-\item{\textbf{[Award Name]} -- [Event/Organization] ([Year]).}
+\item Vietnamese (native), English (fluent).
 \end{itemize}
 
 % ============================================================

@@ -1,10 +1,7 @@
-# Job Application Assistant for [YOUR_NAME]
-
-<!-- SETUP: This file is populated by running /setup -->
-<!-- After running /setup, all [PLACEHOLDER] tokens will be replaced with your actual information -->
+# Job Application Assistant for Le Duy Toan Nguyen
 
 ## Role
-This repo is a job application workspace. Claude acts as a career advisor and application assistant for [YOUR_NAME], helping with:
+This repo is a job application workspace. Claude acts as a career advisor and application assistant for Le Duy Toan Nguyen, helping with:
 1. **Job fit evaluation** - Assess job postings against your profile (skills, experience, behavioral traits)
 2. **CV tailoring** - Adapt existing CV templates (LaTeX/moderncv) to target specific roles
 3. **Cover letter writing** - Draft targeted cover letters using existing templates (LaTeX)
@@ -13,81 +10,77 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 
 ## Candidate Profile
 
-<!-- This section is auto-populated by /setup. You can also fill it in manually. -->
-
 ### Identity
-- **Name:** [YOUR_NAME]
-- **Location:** [YOUR_CITY], [YOUR_COUNTRY] ([YOUR_COMMUTE_CONSTRAINTS])
-- **Languages:** [YOUR_LANGUAGES]
-- **CV language:** [YOUR_CV_LANGUAGE] <!-- English unless your market expects otherwise; /setup asks -->
+- **Name:** Le Duy Toan Nguyen
+- **Location:** Mississauga, ON, Canada (open to remote while studying; open to relocation after graduation 12/2027)
+- **Languages:** English (fluent), Vietnamese (native)
+- **CV language:** English
 
-- **Status:** [YOUR_EMPLOYMENT_STATUS]
-- **LinkedIn headline:** "[YOUR_LINKEDIN_HEADLINE]"
+- **Status:** Full-time student, Computer Systems Technology: Software Development and Network Engineering, Sheridan College (expected 12/2027). Currently on a co-op work term as Software Engineer/Tester Co-op at the Ministry of Public and Business Service Delivery and Procurement (started 01/2026). Returns to Sheridan full-time in September 2026; final co-op work term begins April 2027.
+- **Work authorization:** Study permit + co-op work permit (CWP) tied to Sheridan's co-op program. Only legally authorized to work in Canada during Sheridan-arranged co-op terms until graduation/PGWP; not currently authorized to work in the US/EU without employer sponsorship. See the work-authorization gate in `.claude/skills/job-application-assistant/04-job-evaluation.md` before scoring or drafting for any posting.
+- **LinkedIn headline:** "Software Engineer / Tester Co-op | Full-Stack Developer (React, Spring Boot) | Sheridan College"
 
 ### Education
-<!-- List your degrees, most recent first -->
-- **[DEGREE_LEVEL] in [FIELD]** ([YEAR_START]-[YEAR_END]) - [INSTITUTION]
-  - Thesis: "[THESIS_TITLE]"
-  - Topics: [KEY_TOPICS]
+- **Advanced Diploma, Computer Systems Technology: Software Development and Network Engineering** (2023-Expected 12/2027) - Sheridan College, Mississauga, ON
+  - GPA: 3.7
+  - Topics: Software development, network engineering, full-stack web development, software testing
 
 ### Professional Experience
-<!-- List your roles, most recent first -->
-- **[JOB_TITLE]** ([START_DATE] - [END_DATE]) - **[COMPANY]** ([LOCATION])
-  - [KEY_RESPONSIBILITY_1]
-  - [KEY_RESPONSIBILITY_2]
-  - [KEY_ACHIEVEMENT]
+- **Software Engineer / Tester Co-op** (01/2026 - Present) - **Ministry of Public and Business Service Delivery and Procurement** (Ontario, Canada)
+  - Design, develop, and maintain automated test scripts using Selenium, Java, and Maven, executing suites through Azure DevOps CI/CD pipelines.
+  - Review project requirements with developers and analysts to define effective, edge-case-aware test cases.
+  - Debug test failures, trace root causes, and document defects clearly to speed up developer turnaround.
+- **Software Developer** (04/2023 - 02/2024) - **FPT Software**
+  - Built secure REST APIs (Spring Boot + MySQL) with CORS/CSRF handling for a Japan-based client; optimized SQL queries across Azure DB and MySQL.
+  - Migrated Python and React applications to OutSystems, improving delivery timelines within Agile/Scrum sprints.
+- **Frontend Developer** (08/2022 - 12/2022) - **Tomaho Software**
+  - Developed ReactJS UI components for an Accounting Solution app using Redux/Redux Thunk/Redux Saga; refactored for reuse and optimized rendering with React hooks.
 
 ### Technical Skills
-- **Primary:** [YOUR_PRIMARY_SKILLS]
-- **Secondary:** [YOUR_SECONDARY_SKILLS]
-- **Domain:** [YOUR_DOMAIN_EXPERTISE]
-- **Software:** [YOUR_TOOLS_AND_SOFTWARE]
+- **Primary:** React, TypeScript, Vite, Spring Boot/Java, REST APIs, MySQL/PostgreSQL, Selenium/test automation
+- **Secondary:** MongoDB, Supabase, WebSocket/STOMP, OutSystems, JWT/OAuth2, AWS (Amplify, Elastic Beanstalk), Docker
+- **Domain:** Full-stack web development, QA/test automation
+- **Software:** Git, Azure DevOps, Agile/Scrum, JUnit, Vitest
 
 ### Certifications
-<!-- List relevant certifications with dates -->
-- **[CERTIFICATION_NAME]** - [HOURS]h - completed [DATE]
+- None on record
 
 ### Publications
-<!-- List peer-reviewed publications, if any -->
-- [AUTHOR_LIST] ([YEAR]). [TITLE]. [JOURNAL].
+- None
 
 ### Awards
-<!-- List relevant awards, hackathons, competitions -->
-- [AWARD_NAME] - [EVENT] ([YEAR])
+- None on record (add hackathon placements etc. as applicable)
 
 ### Behavioral Profile
-<!-- Your behavioral assessment results (PI, DISC, Myers-Briggs, or self-assessment) -->
-- **[TRAIT_1]** - [DESCRIPTION]
-- **[TRAIT_2]** - [DESCRIPTION]
-- **Strengths:** [YOUR_STRENGTHS]
-- **Growth areas:** [YOUR_GROWTH_AREAS]
-- **Thrives in:** [YOUR_IDEAL_ENVIRONMENT]
+<!-- Inferred from CV/work history, not a formal assessment - see 02-behavioral-profile.md for full detail -->
+- **Self-directed builder** - ships complete personal projects end-to-end (auth, payments, real-time features, deployment) on his own initiative
+- **Quality-and-detail focus** - gravitates toward test design, edge-case coverage, and root-causing defects
+- **Strengths:** Fast ramp-up on new stacks/tools, comfortable across both dev and QA work, works well in small teams with direct requirements collaboration
+- **Growth areas:** Still early in full-time industry tenure (currently a co-op student); has moved across a few short placements - frame as fast learning and adaptability, not instability
+- **Thrives in:** Roles with clear feature/module ownership, some process (sprints, CI, test discipline) combined with autonomy to execute independently
 
 ### What Excites You
-<!-- What motivates you professionally -->
-- [PASSION_1]
-- [PASSION_2]
+- Building complete features end-to-end, blending development with quality/testing
+- Fast-paced small teams with visible, shippable work
 
 ### Target Sectors
-<!-- Industries and companies you're targeting -->
-- [SECTOR_1]: [EXAMPLE_COMPANIES]
-- [SECTOR_2]: [EXAMPLE_COMPANIES]
+- Software/full-stack development: any industry, open to product companies, government/public sector (per current co-op), and outsourcing/consulting
+- QA/test automation: any industry, particularly teams that value dev-QA collaboration
 
 ### Deal-breakers
-<!-- Hard constraints on job search -->
-- [DEALBREAKER_1]
-- [DEALBREAKER_2]
+- None specified
 
 ## Repo Structure
-- `cv/` - LaTeX CV variants (moderncv template, banking style)
-- `cover_letters/` - LaTeX cover letters (custom cover.cls template)
+- `cv/` - master CV template only (`main_example.tex`, moderncv banking style)
+- `cover_letters/` - shared cover letter template class, fonts, and example (`cover.cls`, `OpenFonts/`, `cover_example.tex`)
+- `applications/` - one folder per tailored application (`<company>_<role>/cv.tex`, `cover_letter.tex`, compiled PDFs, a `README.md` with the posting link and status). See `applications/README.md`.
 - `.claude/skills/` - AI skill definitions for the application workflow
 - `.agents/skills/` - Job search CLI tools
 
 ## Workflow for New Job Applications
 1. User provides a job posting (URL or text)
 2. **Always evaluate fit first**: skills match, experience match, behavioral/culture match. Present this assessment to the user before proceeding.
-3. If good fit: create targeted CV (`cv/main_<company>_<role>.tex`) and cover letter (`cover_letters/cover_<company>_<role>.tex`)
+3. If good fit: create a folder `applications/<company>_<role>/` with a targeted CV (`cv.tex`) and cover letter (`cover_letter.tex`)
 4. **Verify both documents** (see Verification Checklist below)
 5. Prepare interview talking points based on the role requirements and your strengths
 

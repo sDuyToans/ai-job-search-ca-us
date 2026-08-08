@@ -52,13 +52,10 @@ REQUIRED_IGNORE_RULES = [
     "**/job_scraper/*.md",
     "*_BehavioralReport.pdf",
     "linkedin_Profile.pdf",
-    "cv/main_*.*",
-    "!cv/main_example.tex",
-    # ATS text extractions (/apply step 5d) carry the CV's full text.
-    "cv/*.txt",
-    "cover_letters/cover_*.*",
-    # /apply also recognizes the uppercase Cover_* naming variant.
-    "cover_letters/Cover_*.*",
+    # Each tailored application lives in its own applications/<company>_<role>/
+    # folder (source, PDFs, README, symlinks); the whole subfolder is ignored.
+    # applications/README.md itself sits one level up and stays tracked.
+    "applications/*/",
     "documents/cv/**",
     "documents/linkedin/**",
     "documents/diplomas/**",
@@ -81,8 +78,6 @@ REQUIRED_IGNORE_RULES = [
 # ALLOWED_PERMISSIONS, so the widening is explicit and reviewable.
 ALLOWED_IGNORE_NEGATIONS = {
     "!cover_letters/OpenFonts/fonts/**",
-    "!cv/main_example.tex",
-    "!cover_letters/cover_example.tex",
     "!documents/**/.gitkeep",
 }
 

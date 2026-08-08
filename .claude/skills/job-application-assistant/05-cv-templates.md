@@ -10,17 +10,17 @@ framework_version: 1.3.0
 
 All CVs use the moderncv LaTeX package with the "banking" style and "blue" color scheme.
 
-**Output file:** `cv/main_<company>_<role>.tex`
+**Output file:** `applications/<company>_<role>/cv.tex` — one folder per application, created by `/apply` (see `documents/README.md`'s sibling doc `applications/README.md` for the convention)
 **Compile with:** **lualatex** on MiKTeX/TeX Live. pdflatex often fails on modern MiKTeX installs with `fontawesome5` font-expansion errors; lualatex handles the same sources cleanly.
-**Master reference:** `cv/main_example.tex` (comprehensive CV with all competencies, experience, and achievements - use as source when building targeted CVs)
+**Master reference:** `cv/main_example.tex` (comprehensive CV with all competencies, experience, and achievements - use as source when building targeted CVs; stays in `cv/`, never moves into an application folder)
 
 ### Compile command
 
 ```bash
-cd cv && lualatex -interaction=nonstopmode main_<company>_<role>.tex
+cd applications/<company>_<role> && lualatex -interaction=nonstopmode cv.tex
 ```
 
-Expected output: `Output written on main_<company>_<role>.pdf (2 pages, ...)`. Any page count other than 2 is a failure that must be fixed before presenting to the user.
+Expected output: `Output written on cv.pdf (2 pages, ...)`. Any page count other than 2 is a failure that must be fixed before presenting to the user.
 
 ## Document Structure
 
@@ -115,12 +115,11 @@ When the role sits outside your home domain, **lead with the domain-transfer arg
 
 **Create 2-3 profile statement templates for your main role types:**
 
-<!-- SETUP: These are populated based on your background -->
-**For [YOUR_PRIMARY_ROLE_TYPE] roles:**
-> [YOUR_PROFILE_STATEMENT_TEMPLATE_1]
+**For Full-Stack Developer / SWE roles:**
+> Full-stack developer with hands-on experience across React/TypeScript frontends and Spring Boot/Java backends, currently completing a Computer Systems Technology degree at Sheridan College (expected 12/2027). Has independently architected and shipped complete production-style systems - including a full e-commerce platform with JWT auth, real-time chat, and payment integration, deployed on AWS - alongside professional experience building secure REST APIs for a Japan-based client. Combines fast ramp-up on new stacks with a quality-first mindset from current QA/test-automation work.
 
-**For [YOUR_SECONDARY_ROLE_TYPE] roles:**
-> [YOUR_PROFILE_STATEMENT_TEMPLATE_2]
+**For Software Engineer / Tester (SDET/QA) roles:**
+> Software Engineer/Tester with current co-op experience designing and maintaining automated Selenium/Java test suites through Azure DevOps CI/CD, paired with hands-on full-stack development skills (React, Spring Boot, MySQL). Brings a developer's context to test design - defining edge-case-aware test cases directly with developers and analysts, and root-causing defects rather than just reporting them. Currently completing a Computer Systems Technology degree at Sheridan College (expected 12/2027).
 
 Statements labeled *[Used for: <company>_<role>]* were extracted from archived application drafts by `/setup` Path A. They are **phrasing references, never fact sources**: when drafting from one, every factual claim still comes from `01-candidate-profile.md` - a past tailored draft does not vouch for its own accuracy.
 
@@ -201,7 +200,7 @@ Wherever the CV names a verifiable artifact - a public project, a hackathon entr
 
 After writing the CV and before presenting to the user, always compile and visually inspect the PDF. Iterate until the layout is clean. Workflow:
 
-1. Run `lualatex -interaction=nonstopmode main_<company>_<role>.tex`
+1. Run `lualatex -interaction=nonstopmode cv.tex` from inside `applications/<company>_<role>/`
 2. Check the output page count: must be exactly 2
 3. Read the PDF via the Read tool and visually inspect both pages
 4. Check for **orphaned entries**: a `\cventry` title line must never sit alone at the bottom of page 1 with its bullets on page 2
@@ -232,7 +231,7 @@ Restore the highest-relevance item that was previously cut — a CV that ends mi
 Most employers run CVs through an ATS before a human sees them, and the ATS reads the PDF's embedded **text layer**, not the rendered page. A CV can pass visual inspection and still extract as garbage. After the layout passes the compile-and-inspect loop, verify the text layer:
 
 ```bash
-cd cv && pdftotext -layout main_<company>_<role>.pdf main_<company>_<role>.txt
+cd applications/<company>_<role> && pdftotext -layout cv.pdf cv.txt
 ```
 
 `pdftotext` comes from [poppler](https://poppler.freedesktop.org/), not the TeX distribution - it is an **optional** dependency. If it is not installed, skip the mechanical check with a warning and rely on the visual PDF read for keyword coverage.

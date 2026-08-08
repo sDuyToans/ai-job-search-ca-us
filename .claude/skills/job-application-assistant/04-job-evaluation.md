@@ -30,6 +30,14 @@ If the candidate's permit also constrains *hours* or *start date* (a student vis
 
 A role that fails this gate is not scored and not drafted. Everything below applies only to roles that pass it.
 
+### Candidate-specific work-authorization gate (from `/setup`)
+
+Toan holds a **study permit + co-op work permit (CWP)** tied to Sheridan College's co-op program — this is a second, narrower gate on top of the citizenship/PR check above:
+
+- **Canada, co-op/internship postings:** Only legally workable during a Sheridan-authorized co-op term. Current term started 01/2026; next authorized term starts 04/2027 (returns to full-time studies at Sheridan in September 2026 in between). A co-op/internship posting with a start date outside these windows should be flagged, not silently scored as if eligible.
+- **Canada, full-time postings:** Not authorized to work full-time in Canada until after the expected 12/2027 graduation and issuance of a Post-Graduation Work Permit (PGWP). Full-time Canadian roles are fine to evaluate and apply to now (long lead times are normal), but flag any full-time offer with a start date before graduation/PGWP issuance for a work-authorization check before accepting.
+- **US, EU, or other countries:** Not currently authorized to work without employer-sponsored visa/work authorization. Do not auto-fail these postings — many new-grad programs sponsor — but treat "no sponsorship" language as a **hard fail** under the eligibility gate above, and flag sponsorship-silent postings as unverified per the gate's rules.
+
 ## Scoring Dimensions
 
 Evaluate each job posting against these five dimensions:
@@ -44,9 +52,9 @@ How well do the required/preferred skills align with the candidate's capabilitie
 | 40-59 | Partial match, significant upskilling needed |
 | 0-39 | Fundamental mismatch |
 
-**Strong match areas:** [YOUR_PRIMARY_SKILLS]
-**Moderate match areas:** [YOUR_SECONDARY_SKILLS]
-**Weak match areas:** [SKILLS_YOU_LACK]
+**Strong match areas:** React, TypeScript, Vite, Spring Boot/Java, REST API development, Selenium/test automation, SQL (MySQL/PostgreSQL), AWS (Amplify/Elastic Beanstalk), Docker, Git/Agile-Scrum
+**Moderate match areas:** MongoDB, OutSystems (low-code), WebSocket/STOMP real-time systems, CI/CD pipeline authoring (Azure DevOps), auth/security basics (JWT/OAuth2, CORS/CSRF)
+**Weak match areas:** Large-scale distributed systems/architecture, production ML/AI engineering (hobby-level only, via MedicalAIHelper), mobile development, senior/architect-level DevOps or infrastructure
 
 ### 2. Experience Match (0-100)
 Does work history align with what they're looking for?
@@ -58,9 +66,9 @@ Does work history align with what they're looking for?
 | 40-59 | Adjacent experience, would need to make the case |
 | 0-39 | Unrelated experience |
 
-**Strong:** [YOUR_DIRECT_EXPERIENCE_DOMAINS]
-**Moderate:** [YOUR_ADJACENT_EXPERIENCE]
-**Entry-level:** [ROLES_WITH_LIMITED_EXPERIENCE]
+**Strong:** Entry-level/co-op full-stack development, QA/test automation
+**Moderate:** Backend API development for outsourcing/client-facing teams, frontend UI development
+**Entry-level (limited experience):** Standalone full-scope SWE ownership at production scale - still a co-op student, most depth comes from personal projects rather than employer-scale systems
 
 ### 3. Behavioral/Culture Fit (0-100)
 Does the role and company culture match the behavioral profile?
@@ -75,10 +83,12 @@ Does the role and company culture match the behavioral profile?
 **Red flags to research:** Department disorganization, work dominated by maintenance over development, poor chemistry with leadership, culture mismatches. Check reviews, media coverage, LinkedIn connections, and network contacts for insider perspective.
 
 ### 4. Location & Logistics (Pass/Fail + Notes)
-- Within commute range: PASS
-- Remote with occasional office: PASS
-- Requires relocation: FAIL (deal-breaker)
+- Based in Mississauga, ON; within-commute or fully remote roles: PASS
+- Remote roles anywhere (Canada/US/EU/elsewhere), consistent with a return to full-time studies in Sept 2026: PASS
+- Requires relocation with a start date **before** the 12/2027 graduation: FLAG (would need to be evaluated case-by-case against the academic calendar)
+- Requires relocation with a start date **after** graduation (12/2027): PASS (open to relocating)
 - Frequent international travel: FLAG (discuss with user)
+- Always cross-check against the work-authorization gate above before treating a non-Canada location as PASS
 
 ### 5. Career Alignment & Motivation (0-100)
 Does this role advance career goals and contain tasks that energize?
@@ -91,19 +101,20 @@ Does this role advance career goals and contain tasks that energize?
 | 0-39 | Dead end or backwards step |
 
 **Career goals:**
-- [YOUR_CAREER_GOAL_1]
-- [YOUR_CAREER_GOAL_2]
-- [YOUR_CAREER_GOAL_3]
+- Land a co-op/internship for the next authorized work term (starting 04/2027), or any co-op-eligible opening before then
+- Land relevant software work (full-stack, backend, or SWE/SDET) that builds toward a full-time new-grad role
+- Transition into a full-time SWE or full-stack developer role after the 12/2027 graduation and PGWP issuance
+- Grow from the current QA-plus-full-stack mix toward broader ownership of full-stack systems (not just testing or just frontend)
 
 **Motivation filter:** Evaluate not just whether you *can* do the tasks, but whether the tasks will *energize* you. Consider:
-- Tasks that energize: [YOUR_ENERGIZING_TASKS]
-- Tasks that drain: [YOUR_DRAINING_TASKS]
+- Tasks that energize: building complete features end-to-end, blending development with quality/testing, fast-paced small teams, visible/shippable work
+- Tasks that drain: not yet specified - ask the candidate if a posting looks heavy on a specific task type (e.g. pure manual QA with no dev component, or long-cycle work with no visible output) before assuming it's a good fit
 - Non-task factors: leadership style, department culture, company values, degree of autonomy
 
 **Life situation alignment:** Consider personal constraints:
-- **Security**: [YOUR_FINANCIAL_SITUATION_CONTEXT]
-- **Flexibility**: [YOUR_SCHEDULE_CONSTRAINTS]
-- **Professional development**: [YOUR_GROWTH_PRIORITIES]
+- **Security**: Currently a student; salary baseline starts around CAD 20/hour for co-op/internship-level roles. No stated urgency beyond normal co-op search timing.
+- **Flexibility**: Must accommodate the academic calendar - full-time studies resume September 2026, next authorized co-op term starts April 2027. Any role/interview scheduling should account for this.
+- **Professional development**: Wants to keep broadening across QA, backend, and frontend rather than narrowing early; values roles that let him keep building all three.
 
 ### 6. Salary Benchmark (Optional)
 
@@ -157,7 +168,7 @@ Present the evaluation as:
 
 ### Company Research Checklist
 - [ ] Checked company website (mission, values, recent news)
-- [ ] Checked review sites (Glassdoor, Jobindex, etc.)
+- [ ] Checked review sites (Glassdoor, Blind, etc.)
 - [ ] Checked LinkedIn for team size, recent hires, connections
 - [ ] Checked media for restructuring, growth, or workplace issues
 - [ ] Identified network contacts who may know the team/manager
