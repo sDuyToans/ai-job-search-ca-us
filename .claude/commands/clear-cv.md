@@ -21,11 +21,11 @@ You are cleaning up `applications/` - deleting the working CV/cover-letter folde
 ## Step 1: Identify Candidates
 
 1. Read `job_search_tracker.csv`. If it does not exist or has no rows, say so and stop.
-2. Read `applications/` (Glob `applications/*/`) to see which folders actually exist on disk.
+2. Read `applications/` (Glob `applications/*/*/`) to see which company folders actually exist on disk, nested one level under each date folder.
 3. For each tracker row whose `status` matches the clearable set (default or `--status` override):
-   - Derive the folder from the row's `cv_file` column (e.g. `applications/acme_swe/cv.tex` → folder `applications/acme_swe/`). If `cv_file` is empty, skip the row with a note - there is nothing on disk to clear for it.
+   - Derive the folder from the row's `cv_file` column, which already carries the date (e.g. `applications/2026-08-02/acme_swe/cv.tex` → folder `applications/2026-08-02/acme_swe/`). If `cv_file` is empty, skip the row with a note - there is nothing on disk to clear for it.
    - If the folder does not exist on disk, skip silently (already cleared in an earlier run).
-4. **With a company argument:** narrow to tracker rows matching that company (case-insensitive). If the company has no tracker row at all but a matching `applications/<slug>/` folder exists, include it anyway as an "untracked" candidate - the user may be clearing a draft they decided not to pursue, which never went through `/outcome`. Flag untracked candidates clearly; they carry no status to validate against.
+4. **With a company argument:** narrow to tracker rows matching that company (case-insensitive). If the company has no tracker row at all, check for a matching company folder by globbing `applications/*/<slug>/` - the date is not known in advance for an untracked draft. If exactly one match is found, include it as an "untracked" candidate (the user may be clearing a draft they decided not to pursue, which never went through `/outcome`); if more than one date folder matches the same slug, list all matches in the preview and let the user pick. Flag untracked candidates clearly; they carry no status to validate against.
 5. If no candidates remain, say so (e.g. "No closed applications with a working folder to clear - run `/outcome` first if a status needs recording.") and stop.
 
 ---
@@ -37,13 +37,13 @@ You are cleaning up `applications/` - deleting the working CV/cover-letter folde
 
 | Company | Role | Status | Folder | Resolved |
 |---------|------|--------|--------|----------|
-| Acme | SWE | rejected | applications/acme_swe/ | 2026-07-20 |
+| Acme | SWE | rejected | applications/2026-07-05/acme_swe/ | 2026-07-20 |
 
 [If any untracked candidates:]
 ### Untracked (no tracker row - matched by name only)
 | Folder | Last modified |
 |--------|---------------|
-| applications/foo_bar/ | 2026-08-01 |
+| applications/2026-08-01/foo_bar/ | 2026-08-01 |
 
 Each folder's cv.pdf, cover_letter.pdf, and source files will be permanently deleted.
 The permanent archive at documents/applications/<company>_<role>/ is NOT affected - it stays for fit-framework calibration regardless of outcome.
@@ -70,7 +70,7 @@ Do not delete anything before an explicit reply.
 For each confirmed folder:
 
 ```bash
-rm -rf applications/<company>_<role>/
+rm -rf applications/<YYYY-MM-DD>/<company>_<role>/
 ```
 
 Never use a wildcard or glob that could match more than the specific confirmed folder. Never touch `documents/applications/**`, `cv/main_example.tex`, `cover_letters/cover.cls`, or `cover_letters/OpenFonts/` - those are shared framework assets, not per-application working files.
@@ -83,10 +83,10 @@ Never use a wildcard or glob that could match more than the specific confirmed f
 ## /clear-cv - Done
 
 ### Cleared
-- applications/acme_swe/ (rejected 2026-07-20)
+- applications/2026-07-05/acme_swe/ (rejected 2026-07-20)
 
 ### Kept
-- applications/globex_qa/ (interview - still open, not offered for clearing)
+- applications/2026-07-10/globex_qa/ (interview - still open, not offered for clearing)
 
 Permanent archives for cleared applications remain at documents/applications/<company>_<role>/ - unaffected.
 ```

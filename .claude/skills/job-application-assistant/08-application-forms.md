@@ -68,7 +68,7 @@ Prefer the version that **maps the candidate's problem onto the employer's probl
 
 ## Output format
 
-Save to a plain `.txt` file the candidate can copy from, inside that application's `applications/<company>_<role>/` folder (e.g. `applications/<company>_<role>/form_fields.txt`) alongside its `cv.pdf` and `cover_letter.pdf`. One file per employer, containing every field that employer asked for.
+Save to a plain `.txt` file the candidate can copy from, inside that application's `applications/<YYYY-MM-DD>/<company>_<role>/` folder (e.g. `applications/<YYYY-MM-DD>/<company>_<role>/form_fields.txt`) alongside its `cv.pdf` and `cover_letter.pdf`. One file per employer, containing every field that employer asked for.
 
 Include:
 - A header naming the employer and the roles it covers

@@ -69,19 +69,21 @@ Read only the reference files you do not yet have:
 **Resolve the active template (do this once, reuse everywhere below):** if `05-cv-templates.md` or `06-cover-letter-templates.md` opens with an `ACTIVE-TEMPLATE` managed block (inserted by `/add-template`), read its declared **source extension** and **compile command** — these override the stock `.tex`/lualatex (CV) and `.tex`/xelatex (cover letter) defaults for the rest of this workflow. Call these `<CV_EXT>`/`<CV_COMPILE>` and `<COVER_EXT>`/`<COVER_COMPILE>`; where no block is present, they default to `.tex`, the stock lualatex command, and the stock xelatex command respectively. Every `.tex` reference below is really `<CV_EXT>` or `<COVER_EXT>` — stock behavior is unchanged, this only matters when a custom template is active.
 
 Also read the most recent existing CV and cover letter files for concrete structural reference (one of each is enough):
-- Read any existing `applications/*/cv<CV_EXT>` file as a structural reference
-- Read any existing `applications/*/cover_letter<COVER_EXT>` file as a structural reference
+- Read any existing `applications/*/*/cv<CV_EXT>` file as a structural reference
+- Read any existing `applications/*/*/cover_letter<COVER_EXT>` file as a structural reference
 - If no application folder exists yet, fall back to `cv/main_example.tex` and `cover_letters/cover_example.tex`
 
 *The master candidate profile (`01-candidate-profile.md`), the master CV (`cv/main_example.tex`), and CLAUDE.md's Candidate Profile section are the sole source of truth for facts; existing tailored CVs may be read for structure and phrasing only, never as a source of claims.*
 
-**Create the application folder before writing anything:** `applications/<company>_<role>/`, using the same lowercase, underscore-joined slug convention as existing folders. Then set up the cover letter's shared assets once:
+**Create the application folder before writing anything:** `applications/<YYYY-MM-DD>/<company>_<role>/`, where `<YYYY-MM-DD>` is today's actual date (the date this application is being drafted — never a placeholder), and `<company>_<role>` uses the same lowercase, underscore-joined slug convention as existing folders. Then set up the cover letter's shared assets once:
 
 ```bash
-mkdir -p applications/<company>_<role>
-ln -s ../../cover_letters/cover.cls applications/<company>_<role>/cover.cls
-ln -s ../../cover_letters/OpenFonts applications/<company>_<role>/OpenFonts
+mkdir -p applications/<YYYY-MM-DD>/<company>_<role>
+ln -s ../../../cover_letters/cover.cls applications/<YYYY-MM-DD>/<company>_<role>/cover.cls
+ln -s ../../../cover_letters/OpenFonts applications/<YYYY-MM-DD>/<company>_<role>/OpenFonts
 ```
+
+(The symlinks go up three levels — company folder → date folder → `applications/` → repo root — one more than before the date folder was added.)
 
 (Skip the symlinks if a custom template is active and does not use `cover.cls`.)
 
@@ -90,7 +92,7 @@ ln -s ../../cover_letters/OpenFonts applications/<company>_<role>/OpenFonts
 - **Engage nice-to-haves by name** where the profile supports honest adjacency (e.g. "conceptually aligned with <named tool>"), and use the posting's own term over a synonym wherever it is truthfully applicable - including in CV section headings (a posting hiring for "MLOps" should find a heading containing "MLOps", not only a paraphrase).
 - **Address stated logistics and prerequisites** in the cover letter where the posting raises them: security clearance willingness, start date or availability, commute or location fit, and the posting's reference/job ID where one exists. When the employer operates across several countries, a truthful language-capabilities sentence mapped to their footprint is high-value targeting.
 
-### CV (`applications/<company>_<role>/cv<CV_EXT>`)
+### CV (`applications/<YYYY-MM-DD>/<company>_<role>/cv<CV_EXT>`)
 - In the **CV language from the profile** (the `CV language:` line in CLAUDE.md's Identity section). When the profile does not set one, default to **English**. Never switch language per posting - the CV language is a profile-level choice, so all CVs stay consistent and reusable
 - Follow the moderncv/banking format from `05-cv-templates.md`
 - Tailor the profile statement and experience bullets to the specific role
@@ -98,7 +100,7 @@ ln -s ../../cover_letters/OpenFonts applications/<company>_<role>/OpenFonts
 - Keep to 2 pages
 - **Grounding Audit:** Before writing to disk, audit all tailored bullet points against the union of three sources: `.claude/skills/job-application-assistant/01-candidate-profile.md` + the master CV (`cv/main_example.tex`) + `CLAUDE.md`'s Candidate Profile section to verify that all dates, roles, and metrics match exactly (zero profile drift or fabrication).
 
-### Cover Letter (`applications/<company>_<role>/cover_letter<COVER_EXT>`)
+### Cover Letter (`applications/<YYYY-MM-DD>/<company>_<role>/cover_letter<COVER_EXT>`)
 - **Match the language of the job posting** (Danish posting -> Danish cover letter, English posting -> English cover letter)
 - Follow the structure from `06-cover-letter-templates.md`
 - Use the `cover.cls` template
@@ -220,11 +222,11 @@ After all edits are applied, the two files on disk are the final drafts.
 Use `<CV_COMPILE>` and `<COVER_COMPILE>` resolved in Step 2 (the active template's declared compile command, or the stock defaults below if no custom template is active):
 
 ```bash
-cd applications/<company>_<role> && lualatex -interaction=nonstopmode cv.tex
+cd applications/<YYYY-MM-DD>/<company>_<role> && lualatex -interaction=nonstopmode cv.tex
 xelatex -interaction=nonstopmode cover_letter.tex
 ```
 
-Both compile from the same `applications/<company>_<role>/` directory — no `cd` between them. The cover letter's `cover.cls`/`OpenFonts` symlinks (set up in Step 2) must already be present in that folder.
+Both compile from the same `applications/<YYYY-MM-DD>/<company>_<role>/` directory — no `cd` between them. The cover letter's `cover.cls`/`OpenFonts` symlinks (set up in Step 2) must already be present in that folder.
 
 - **Stock CV** uses **lualatex** — pdflatex fails on modern MiKTeX with fontawesome5 font-expansion errors. lualatex handles the same sources cleanly.
 - **Stock cover letter** uses **xelatex** — cover.cls requires fontspec.
@@ -236,13 +238,13 @@ If either compile fails, fix the error and re-compile until clean.
 
 Read both PDFs via the Read tool and verify:
 
-**CV (`applications/<company>_<role>/cv.pdf`):**
+**CV (`applications/<YYYY-MM-DD>/<company>_<role>/cv.pdf`):**
 - [ ] Exactly 2 pages (not 1, not 3)
 - [ ] No orphaned `\cventry` titles — a job/education title line must never sit alone at the bottom of page 1 with its bullets on page 2. This is the most common failure.
 - [ ] Section headings are not isolated at the top of page 2 with only 1-2 lines below
 - [ ] No awkward whitespace gaps
 
-**Cover letter (`applications/<company>_<role>/cover_letter.pdf`):**
+**Cover letter (`applications/<YYYY-MM-DD>/<company>_<role>/cover_letter.pdf`):**
 - [ ] Exactly 1 page
 - [ ] Signature block visible, not cut off or pushed to a second page
 - [ ] Bullet list font matches surrounding body text (both should be Raleway-Medium)
@@ -268,7 +270,7 @@ An ATS parser reads the PDF's embedded **text layer**, not the rendered page —
 **1. Extract the text layer:**
 
 ```bash
-cd applications/<company>_<role> && pdftotext -layout cv.pdf cv.txt
+cd applications/<YYYY-MM-DD>/<company>_<role> && pdftotext -layout cv.pdf cv.txt
 ```
 
 Read the `.txt` file.
@@ -317,8 +319,8 @@ Summarize 3-5 key decisions made to tailor the application:
 
 ### Files Created
 List the files written:
-- `applications/<company>_<role>/cv<CV_EXT>`
-- `applications/<company>_<role>/cover_letter<COVER_EXT>`
+- `applications/<YYYY-MM-DD>/<company>_<role>/cv<CV_EXT>`
+- `applications/<YYYY-MM-DD>/<company>_<role>/cover_letter<COVER_EXT>`
 
 Tell the user: "Both files are ready for your review. Open them to check the final output before compiling."
 

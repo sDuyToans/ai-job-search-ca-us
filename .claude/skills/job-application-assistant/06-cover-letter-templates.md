@@ -8,7 +8,7 @@ framework_version: 1.0.1
 
 Cover letters use a custom LaTeX document class (`cover.cls`) with Lato/Raleway fonts.
 
-**Output file:** `applications/<company>_<role>/cover_letter.tex` — same per-application folder as the CV (see `applications/README.md`)
+**Output file:** `applications/<YYYY-MM-DD>/<company>_<role>/cover_letter.tex` — same per-application folder as the CV (see `applications/README.md`)
 **Compile with:** XeLaTeX (cover.cls requires fontspec)
 **Font directory:** `cover_letters/OpenFonts/fonts/` (the canonical copy; each application folder gets a symlink to it, see below)
 
@@ -17,14 +17,14 @@ Cover letters use a custom LaTeX document class (`cover.cls`) with Lato/Raleway 
 `cover.cls` and the `OpenFonts/` directory live once in `cover_letters/` and are shared by every application via symlinks, because `cover.cls` resolves its fonts with a literal filesystem path (`Path = OpenFonts/fonts/...`, relative to the compile working directory) rather than a TeX search path — copying the fonts into every folder would work too, but would drift if the shared template ever changes. When creating a new application folder, set the symlinks up once:
 
 ```bash
-ln -s ../../cover_letters/cover.cls applications/<company>_<role>/cover.cls
-ln -s ../../cover_letters/OpenFonts applications/<company>_<role>/OpenFonts
+ln -s ../../../cover_letters/cover.cls applications/<YYYY-MM-DD>/<company>_<role>/cover.cls
+ln -s ../../../cover_letters/OpenFonts applications/<YYYY-MM-DD>/<company>_<role>/OpenFonts
 ```
 
 ### Compile command
 
 ```bash
-cd applications/<company>_<role> && xelatex -interaction=nonstopmode cover_letter.tex
+cd applications/<YYYY-MM-DD>/<company>_<role> && xelatex -interaction=nonstopmode cover_letter.tex
 ```
 
 Expected output: `Output written on cover_letter.pdf (1 page, ...)`. Any page count other than 1 is a failure that must be fixed before presenting to the user. If xelatex reports it cannot find `cover.cls` or a font file, the symlinks above are missing — create them and re-run.

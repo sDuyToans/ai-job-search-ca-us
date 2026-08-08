@@ -164,7 +164,7 @@ Insert (or replace, if one exists) this block immediately after the file's H1 ti
 > - **Compile command:** `<the full declared command>` (not the command named in the stock guidance below — `/apply`'s compile step must use this instead)
 > - **Fonts:** <font summary, including any path note for bundled fonts>
 > - **Page limit:** exactly <N> page(s)
-> - **Output file:** `applications/<company>_<role>/cv<source-extension>` / `applications/<company>_<role>/cover_letter<source-extension>`; copy any class/package/font files the template needs into the output directory, or symlink them from a shared location (see `06-cover-letter-templates.md` for the pattern the stock template uses)
+> - **Output file:** `applications/<YYYY-MM-DD>/<company>_<role>/cv<source-extension>` / `applications/<YYYY-MM-DD>/<company>_<role>/cover_letter<source-extension>`; copy any class/package/font files the template needs into the output directory, or symlink them from a shared location (see `06-cover-letter-templates.md` for the pattern the stock template uses)
 <!-- END ACTIVE-TEMPLATE -->
 ```
 

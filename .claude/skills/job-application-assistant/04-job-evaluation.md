@@ -70,6 +70,16 @@ Does work history align with what they're looking for?
 **Moderate:** Backend API development for outsourcing/client-facing teams, frontend UI development
 **Entry-level (limited experience):** Standalone full-scope SWE ownership at production scale - still a co-op student, most depth comes from personal projects rather than employer-scale systems
 
+**Stated years-of-experience requirement:** Target role types are internship, entry-level,
+and co-op — Toan's target experience band is **0-1 year** of professional experience. A
+posting that **explicitly** requires a minimum **above 1 year** (e.g. "2+ years," "3-5
+years"), or carries a Mid-level/Intermediate/Senior label with no new-grad/co-op/entry-level/
+internship carve-out, should score in the **0-39** band on this dimension even when the
+skills line up — the mismatch is tenure, not capability, and no amount of cover-letter
+framing closes a stated multi-year gap. A posting silent on years, or one stating a minimum
+of "0-1 years"/"1+ years"/explicitly welcoming new grads, co-op students, or interns, is not
+penalized here.
+
 ### 3. Behavioral/Culture Fit (0-100)
 Does the role and company culture match the behavioral profile?
 

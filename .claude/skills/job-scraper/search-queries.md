@@ -38,7 +38,7 @@ Strongest and most desired career direction.
 
 ```
 site:linkedin.com/jobs "software engineer co-op" OR "full-stack developer co-op" OR "software engineer intern" OR "full-stack developer intern" Toronto OR Mississauga OR "Greater Toronto Area"
-site:linkedin.com/jobs "full-stack developer" React "Spring Boot" remote
+site:linkedin.com/jobs "junior full-stack developer" OR "entry level full-stack developer" OR "full-stack developer new grad" React "Spring Boot" remote -senior -intermediate -"2+ years" -"3+ years" -"5+ years"
 site:indeed.ca "software developer intern" OR "software engineer intern" Ontario
 site:jobbank.gc.ca "software developer" co-op OR intern Ontario
 ```
@@ -48,8 +48,8 @@ site:jobbank.gc.ca "software developer" co-op OR intern Ontario
 Matches current co-op role and hands-on Selenium/test-automation experience.
 
 ```
-site:linkedin.com/jobs "QA automation" OR "SDET" OR "test automation engineer" Selenium Canada OR remote
-site:indeed.ca "automation tester" OR "QA engineer" Selenium Java Ontario
+site:linkedin.com/jobs "junior QA automation" OR "entry level SDET" OR "test automation engineer co-op" Selenium Canada OR remote -senior -intermediate -"2+ years" -"3+ years" -"5+ years"
+site:indeed.ca "automation tester" OR "junior QA engineer" OR "entry level QA engineer" Selenium Java Ontario -senior -intermediate -"2+ years" -"3+ years"
 ```
 
 ### Priority 3: Backend Developer / Frontend Developer
@@ -57,15 +57,15 @@ site:indeed.ca "automation tester" OR "QA engineer" Selenium Java Ontario
 Adjacent roles matching individual layers of the stack.
 
 ```
-site:linkedin.com/jobs "backend developer" "Spring Boot" Java remote OR Canada
-site:linkedin.com/jobs "frontend developer" React TypeScript remote OR Canada
+site:linkedin.com/jobs "junior backend developer" OR "entry level backend developer" OR "backend developer new grad" "Spring Boot" Java remote OR Canada -senior -intermediate -"2+ years" -"3+ years" -"5+ years"
+site:linkedin.com/jobs "junior frontend developer" OR "entry level frontend developer" OR "frontend developer new grad" React TypeScript remote OR Canada -senior -intermediate -"2+ years" -"3+ years" -"5+ years"
 ```
 
 ### Priority 4: Broader Technical Roles (wider net, remote-friendly)
 
 ```
-site:linkedin.com/jobs "junior software engineer" OR "associate software engineer" remote
-site:indeed.ca "web developer" OR "application developer" Ontario
+site:linkedin.com/jobs "junior software engineer" OR "associate software engineer" OR "entry level software engineer" remote -senior -intermediate -"2+ years" -"3+ years"
+site:indeed.ca "web developer" OR "application developer" OR "entry level developer" Ontario -senior -intermediate -"2+ years"
 ```
 
 ## Location Filter
@@ -80,6 +80,10 @@ When evaluating results, apply these tiers. Cross-check every non-Canada or full
 ## Date Filter
 
 Only include jobs posted within the last 14 days, or with an application deadline that has not yet passed. If a posting date cannot be determined, include it but flag as "date unknown".
+
+## Experience Filter
+
+Target role types are **internship, entry-level, and co-op** — Toan's target experience band is **0-1 year** of professional experience (current Canadian co-op + two short prior placements land him at the low end of that band; see the CV in `CLAUDE.md`). The `-senior -intermediate -"2+ years" -"3+ years" -"5+ years"` exclusion terms in the query templates above are a first pass, not a guarantee — job boards don't reliably honor negative keyword matching, so this is backstopped by the fit check in `job-scraper/SKILL.md` Step 3, which reads the actual posting text and downgrades anything with a stated minimum above 1 year regardless of what the search query caught. Postings silent on experience, or stating "0-1 years"/"1+ years"/"new grad welcome," are in scope and should not be excluded — the cutoff is a stated minimum **above** 1 year. When adapting or writing new queries, carry the same exclusion terms forward and prefer "internship"/"entry level"/"co-op"/"junior"/"new grad" qualifiers over unqualified role titles — an unqualified title (e.g. "backend developer" with no level) defaults to mid-level results on most boards.
 
 ## Adapting Queries
 

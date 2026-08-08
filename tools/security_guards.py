@@ -52,9 +52,10 @@ REQUIRED_IGNORE_RULES = [
     "**/job_scraper/*.md",
     "*_BehavioralReport.pdf",
     "linkedin_Profile.pdf",
-    # Each tailored application lives in its own applications/<company>_<role>/
-    # folder (source, PDFs, README, symlinks); the whole subfolder is ignored.
-    # applications/README.md itself sits one level up and stays tracked.
+    # Each tailored application lives in its own applications/<YYYY-MM-DD>/<company>_<role>/
+    # folder (source, PDFs, README, symlinks); matching the date folder ignores
+    # it and everything nested inside, wholesale. applications/README.md itself
+    # sits two levels up and stays tracked.
     "applications/*/",
     "documents/cv/**",
     "documents/linkedin/**",

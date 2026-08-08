@@ -90,7 +90,10 @@ For each promising result from Step 1:
 **From CLI results:** Search output already includes title, company, location, date,
 and URL. For jobs worth a deeper look, fetch full detail with that portal's `detail`
 command (see its SKILL.md — do not guess flags) to extract **key requirements**,
-**application deadline**, and a brief description snippet.
+**application deadline**, a brief description snippet, and the **stated years-of-experience
+requirement or seniority level** when present (e.g. "2+ years", "Mid-level", "Intermediate").
+Silence on experience is not evidence the role is entry-level; only an explicit statement
+counts for the check in Step 3.
 
 **From WebSearch results:** Use `WebFetch` on the posting URL and extract the same
 fields manually.
@@ -112,6 +115,17 @@ For each new job, do a rapid fit check (NOT the full evaluation from `04-job-eva
 - **High match**: Role directly involves your core skills
 - **Medium match**: Role is adjacent to your experience
 - **Low match**: Role requires significant skills you lack
+
+**Experience-level check (applies after the skills-based rating above).** Target role types
+are **internship, entry-level, and co-op** — Toan's target experience band is **0-1 year**
+of professional experience. If the posting **explicitly** states a minimum requirement
+**above 1 year** (e.g. "2+ years," "3-5 years"), or carries a Mid-level/Intermediate/Senior
+label with no "new grad / co-op / entry-level / internship welcome" carve-out, cap the fit
+at **Low** regardless of the skills-based rating above, and say why in the highlights (e.g.
+"Low match — posting states 3+ years required, skills otherwise strong"). Do not downgrade
+postings that are silent on experience, state a minimum of 0-1 year (e.g. "0-1 years,"
+"1+ years"), or explicitly welcome new grads/co-op students/interns alongside a stated
+years figure.
 
 ### Step 4: Deduplicate & Store
 

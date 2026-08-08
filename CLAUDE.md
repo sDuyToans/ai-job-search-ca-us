@@ -73,14 +73,14 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 ## Repo Structure
 - `cv/` - master CV template only (`main_example.tex`, moderncv banking style)
 - `cover_letters/` - shared cover letter template class, fonts, and example (`cover.cls`, `OpenFonts/`, `cover_example.tex`)
-- `applications/` - one folder per tailored application (`<company>_<role>/cv.tex`, `cover_letter.tex`, compiled PDFs, a `README.md` with the posting link and status). See `applications/README.md`.
+- `applications/` - one date folder per batch of applications, one company folder inside each (`<YYYY-MM-DD>/<company>_<role>/cv.tex`, `cover_letter.tex`, compiled PDFs, a `README.md` with the posting link and status). See `applications/README.md`.
 - `.claude/skills/` - AI skill definitions for the application workflow
 - `.agents/skills/` - Job search CLI tools
 
 ## Workflow for New Job Applications
 1. User provides a job posting (URL or text)
 2. **Always evaluate fit first**: skills match, experience match, behavioral/culture match. Present this assessment to the user before proceeding.
-3. If good fit: create a folder `applications/<company>_<role>/` with a targeted CV (`cv.tex`) and cover letter (`cover_letter.tex`)
+3. If good fit: create a folder `applications/<YYYY-MM-DD>/<company>_<role>/` with a targeted CV (`cv.tex`) and cover letter (`cover_letter.tex`)
 4. **Verify both documents** (see Verification Checklist below)
 5. Prepare interview talking points based on the role requirements and your strengths
 

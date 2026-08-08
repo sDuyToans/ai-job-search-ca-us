@@ -10,14 +10,14 @@ framework_version: 1.3.0
 
 All CVs use the moderncv LaTeX package with the "banking" style and "blue" color scheme.
 
-**Output file:** `applications/<company>_<role>/cv.tex` — one folder per application, created by `/apply` (see `documents/README.md`'s sibling doc `applications/README.md` for the convention)
+**Output file:** `applications/<YYYY-MM-DD>/<company>_<role>/cv.tex` — one folder per application, created by `/apply` (see `documents/README.md`'s sibling doc `applications/README.md` for the convention)
 **Compile with:** **lualatex** on MiKTeX/TeX Live. pdflatex often fails on modern MiKTeX installs with `fontawesome5` font-expansion errors; lualatex handles the same sources cleanly.
 **Master reference:** `cv/main_example.tex` (comprehensive CV with all competencies, experience, and achievements - use as source when building targeted CVs; stays in `cv/`, never moves into an application folder)
 
 ### Compile command
 
 ```bash
-cd applications/<company>_<role> && lualatex -interaction=nonstopmode cv.tex
+cd applications/<YYYY-MM-DD>/<company>_<role> && lualatex -interaction=nonstopmode cv.tex
 ```
 
 Expected output: `Output written on cv.pdf (2 pages, ...)`. Any page count other than 2 is a failure that must be fixed before presenting to the user.
@@ -200,7 +200,7 @@ Wherever the CV names a verifiable artifact - a public project, a hackathon entr
 
 After writing the CV and before presenting to the user, always compile and visually inspect the PDF. Iterate until the layout is clean. Workflow:
 
-1. Run `lualatex -interaction=nonstopmode cv.tex` from inside `applications/<company>_<role>/`
+1. Run `lualatex -interaction=nonstopmode cv.tex` from inside `applications/<YYYY-MM-DD>/<company>_<role>/`
 2. Check the output page count: must be exactly 2
 3. Read the PDF via the Read tool and visually inspect both pages
 4. Check for **orphaned entries**: a `\cventry` title line must never sit alone at the bottom of page 1 with its bullets on page 2
@@ -231,7 +231,7 @@ Restore the highest-relevance item that was previously cut — a CV that ends mi
 Most employers run CVs through an ATS before a human sees them, and the ATS reads the PDF's embedded **text layer**, not the rendered page. A CV can pass visual inspection and still extract as garbage. After the layout passes the compile-and-inspect loop, verify the text layer:
 
 ```bash
-cd applications/<company>_<role> && pdftotext -layout cv.pdf cv.txt
+cd applications/<YYYY-MM-DD>/<company>_<role> && pdftotext -layout cv.pdf cv.txt
 ```
 
 `pdftotext` comes from [poppler](https://poppler.freedesktop.org/), not the TeX distribution - it is an **optional** dependency. If it is not installed, skip the mechanical check with a warning and rely on the visual PDF read for keyword coverage.
