@@ -10,11 +10,15 @@ Installed dedicated CLIs, evaluated and built via `/add-portal` (2026-08-07):
 - `weworkremotely-search` — We Work Remotely (fully remote; programming/full-stack/backend/frontend/devops categories)
 - `eluta-search` — Eluta.ca (Canada-wide; has adaptive bot-detection under heavy request volume — see the skill's "Keep volume low" warning)
 
+Installed dedicated CLIs, evaluated and built via `/add-portal` (2026-08-09):
+- `wellfound-search` — Wellfound (global startup job board, strong remote/early-career coverage). **Previously listed below as "genuinely blocked" — that finding did not reproduce on 2026-08-09 re-investigation** with a standard browser User-Agent; the earlier test likely used a naive request that tripped a WAF rule. Live-verified working (search + detail, including a real QA internship posting). Has its own intermittent-403-under-bursty-use quirk, similar to `eluta-search`'s bot-detection — see the skill's Notes. Take any future "genuinely blocked" finding in this file as a snapshot in time, not permanent — worth an occasional re-check rather than a standing exclusion.
+- `dice-search` — Dice (US tech job board, real Canada/remote coverage). Dice's own query-string search UI (`/jobs?q=...`) is explicitly `robots.txt`-disallowed, but a separate SEO path-based search (`/jobs/q-<keywords>-l-<location>-jobs`) is not, and works cleanly — the skill only ever uses that allowed form. Live-verified working (search + detail); first live test surfaced a real "Python Developer - Jr" posting in Mississauga, ON. Postings skew mid-to-senior on average but genuine junior/entry/internship listings do appear.
+
 No dedicated CLI (`robots.txt` blocks a single crawler identity from getting both search and detail), but **not a dead end** — see "Indeed: how the fallback actually works" below:
 - **Indeed Canada** — WebSearch + WebFetch on individual `/viewjob?jk=...` pages works (confirmed 2026-08-08); a dedicated CLI is still blocked because Indeed's own search-results pages aren't crawlable, only individual posting pages that a search engine has already indexed.
 
 Evaluated but genuinely blocked, no fallback available:
-- **Wellfound, Himalayas, Monster** — all three actively bot-block plain HTTP requests (403/Cloudflare challenge on the real content pages) regardless of `robots.txt`
+- **Himalayas, Monster** — both actively bot-block plain HTTP requests (403/Cloudflare challenge on the real content pages) regardless of `robots.txt`
 - **Glassdoor** — `robots.txt` explicitly disallows the real job-search/detail URL patterns; also login-walled for full listings
 - **ZipRecruiter Canada** — no distinct Canadian domain (redirects to `ziprecruiter.com?country=ca`); known aggressive anti-bot protection
 
