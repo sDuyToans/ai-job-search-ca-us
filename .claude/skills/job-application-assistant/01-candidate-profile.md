@@ -61,6 +61,7 @@ framework_version: 1.0.0
 - **Databases & BaaS:** MySQL, PostgreSQL, Oracle, MongoDB, Supabase
 - **Cloud & DevOps:** AWS (Amplify, Elastic Beanstalk, Route 53), Docker, Azure DevOps & CI/CD
 - **Tools & Practices:** Git, Agile/Scrum
+- **AI-Assisted Development:** Uses Claude Code daily on personal projects for code planning, generation, and test-writing
 
 ## Certifications
 <!-- None listed yet -->

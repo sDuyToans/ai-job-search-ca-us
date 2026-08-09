@@ -66,7 +66,7 @@ For each **enabled** portal skill:
 
 1. Read its `SKILL.md` to find the correct `bun run …` invocation and supported flags.
 2. Translate the query terms from `search-queries.md` into that portal's flag format (e.g. `--key`, `--search-string`, `--query`, filter codes — whatever the portal's SKILL.md specifies).
-3. Scope to the last 14 days using the portal's supported recency flag (`--jobage`, `--since <YYYY-MM-DD>`, `--order PublicationDate`, etc. — as documented per portal).
+3. Scope to the last 7 days using the portal's supported recency flag (`--jobage`, `--since <YYYY-MM-DD>`, `--order PublicationDate`, etc. — as documented per portal) where one exists. Treat this as best-effort, not a guarantee: `jobbank-ca-search`'s `--jobage` only has coarse `<=2`/`<=30`-day tiers (asking for 7 silently returns up to 30 days), and `eluta-search`/`remoteok-search`/`weworkremotely-search` have no recency flag at all. The mandatory post-fetch date check in Step 2 is what actually enforces the 7-day window — this flag just reduces how much gets fetched in the first place.
 4. Cap results to ~20 per call using the portal's limit flag.
 5. Use `--format json` for machine-readable output.
 
@@ -81,7 +81,9 @@ Use `WebSearch` for:
 - Any portal whose CLI fails at runtime
 - When bun is unavailable (Step 1a failed)
 
-Use the site-specific query strings from `search-queries.md` directly as WebSearch queries for these portals.
+Use the site-specific query strings from `search-queries.md` directly as WebSearch queries for these portals. **Run this step even when it usually turns up nothing** — silently skipping it (as happened before 2026-08-08) means a genuinely working source can sit unused for weeks with no evidence anything is missing.
+
+**Indeed specifically** is not a dead end — see `search-queries.md`'s "Indeed: how the fallback actually works" for the full mechanism. In short: the `site:ca.indeed.com/viewjob` query pattern surfaces individually-indexed posting URLs (a bare `site:indeed.ca` does not — it only returns Indeed's own category pages), and `WebFetch` on those `viewjob?jk=...` URLs works cleanly. Check every fetched Indeed posting for an explicit expiry statement ("This job posting has expired" / "no longer accepting applications") before including it — Indeed keeps expired postings indexed long after the employer closed applications.
 
 ### Step 2: Fetch & Parse
 
@@ -101,6 +103,7 @@ fields manually.
 For every candidate:
 - Skip if the URL or company+title combo already exists in `seen_jobs.json`
 - Skip if the company+role already appears in `job_search_tracker.csv`
+- **Enforce the 7-day date window here, not just at query time (mandatory, applies to every portal's results).** Parse each result's own `date` field — converting relative strings like "4 hours ago" / "2 days ago" to an absolute date against today where a portal returns them that way — and drop it unless posted within the last 7 days, **unless** the posting states an application deadline that has not yet passed, which stays in scope regardless of post date. Do this even for results from a portal whose search query already requested a tight window: Job Bank's `--jobage` rounds up to a 30-day bucket past 2 days, and eluta-search/remoteok-search/weworkremotely-search have no native recency flag at all, so query-time scoping alone silently lets month-old postings through on several portals. If a posting's date truly cannot be determined, include it but flag it as "date unknown" rather than dropping or guessing.
 
 ### Step 2.5: Mass-Posting Detection (within this run)
 
